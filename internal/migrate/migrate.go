@@ -60,7 +60,7 @@ func newMigrator(db *sql.DB, files fs.FS) (*migrate.Migrate, error) {
 		return nil, fmt.Errorf("postgres with instance: %w", err)
 	}
 
-	source, err := iofs.New(files, "migrations")
+	source, err := iofs.New(files, ".")
 	if err != nil {
 		return nil, fmt.Errorf("iofs source: %w", err)
 	}
