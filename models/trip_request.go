@@ -7,8 +7,8 @@ import (
 )
 
 type TripRequest struct {
-	RequestID       uuid.UUID  `gorm:"column:request_id;type:uuid;primaryKey"`
-	RideID          uuid.UUID  `gorm:"column:ride_id;type:uuid;not null;index"`
+	ID              uuid.UUID  `gorm:"column:request_id;type:uuid;primaryKey"`
+	TripID          uuid.UUID  `gorm:"column:trip_id;type:uuid;not null;index"`
 	RiderID         uuid.UUID  `gorm:"column:rider_id;type:uuid;not null;index"`
 	FareID          *uuid.UUID `gorm:"column:fare_id;type:uuid;index"`
 	Status          string     `gorm:"type:varchar(40);not null;default:search_started"`

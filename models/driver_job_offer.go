@@ -7,9 +7,9 @@ import (
 )
 
 type DriverJobOffer struct {
-	JobOfferID       uuid.UUID  `gorm:"column:job_offer_id;type:uuid;primaryKey"`
+	ID               uuid.UUID  `gorm:"column:job_offer_id;type:uuid;primaryKey"`
 	RequestID        uuid.UUID  `gorm:"column:request_id;type:uuid;not null;index"`
-	RideID           uuid.UUID  `gorm:"column:ride_id;type:uuid;not null;index"`
+	TripID           uuid.UUID  `gorm:"column:trip_id;type:uuid;not null;index"`
 	DriverID         uuid.UUID  `gorm:"column:driver_id;type:uuid;not null;index"`
 	OfferRank        int        `gorm:"column:offer_rank;not null;default:0"`
 	Status           string     `gorm:"type:varchar(40);not null;default:pending"`

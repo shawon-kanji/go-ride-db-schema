@@ -7,9 +7,9 @@ import (
 )
 
 type OngoingTrip struct {
-	TripID      uuid.UUID  `gorm:"column:trip_id;type:uuid;primaryKey"`
+	ID          uuid.UUID  `gorm:"column:id;type:uuid;primaryKey"`
 	RequestID   uuid.UUID  `gorm:"column:request_id;type:uuid;not null;uniqueIndex"`
-	RideID      uuid.UUID  `gorm:"column:ride_id;type:uuid;not null;uniqueIndex"`
+	TripID      uuid.UUID  `gorm:"column:trip_id;type:uuid;not null;uniqueIndex"`
 	RiderID     uuid.UUID  `gorm:"column:rider_id;type:uuid;not null;index"`
 	DriverID    uuid.UUID  `gorm:"column:driver_id;type:uuid;not null;index"`
 	Status      string     `gorm:"type:varchar(40);not null;default:assigned"`

@@ -10,7 +10,7 @@ import (
 type TripHistory struct {
 	ID            uuid.UUID       `gorm:"type:uuid;primaryKey"`
 	RequestID     uuid.UUID       `gorm:"column:request_id;type:uuid;not null;index"`
-	RideID        uuid.UUID       `gorm:"column:ride_id;type:uuid;not null;index"`
+	TripID        uuid.UUID       `gorm:"column:trip_id;type:uuid;not null;index"`
 	RiderID       *uuid.UUID      `gorm:"column:rider_id;type:uuid;index"`
 	DriverID      *uuid.UUID      `gorm:"column:driver_id;type:uuid;index"`
 	EventType     string          `gorm:"column:event_type;type:varchar(64);not null;index"`

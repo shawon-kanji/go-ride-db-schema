@@ -7,7 +7,7 @@ import (
 )
 
 type TripFare struct {
-	FareID          uuid.UUID  `gorm:"column:fare_id;type:uuid;primaryKey"`
+	ID              uuid.UUID  `gorm:"column:fare_id;type:uuid;primaryKey"`
 	RequestID       uuid.UUID  `gorm:"column:request_id;type:uuid;not null;uniqueIndex"`
 	CurrencyCode    string     `gorm:"column:currency_code;type:varchar(3);not null"`
 	BaseFare        float64    `gorm:"column:base_fare;type:numeric(12,2);not null;default:0"`
