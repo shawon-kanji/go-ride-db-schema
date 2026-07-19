@@ -32,7 +32,15 @@ func LoadDB() (DBConfig, error) {
 }
 
 func (c DBConfig) DSN() string {
-	return fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=%s", c.Host, c.Port, c.User, c.Password, c.Name, c.SSLMode)
+	return fmt.Sprintf(
+		"host=%s port=%d user=%s password=%s dbname=%s sslmode=%s",
+		c.Host,
+		c.Port,
+		c.User,
+		c.Password,
+		c.Name,
+		c.SSLMode,
+	)
 }
 
 func getEnv(key, fallback string) string {

@@ -37,3 +37,24 @@ DB config env vars:
 - `DB_PASSWORD` (default `postgres`)
 - `DB_NAME` (default `go_ride`)
 - `DB_SSLMODE` (default `disable`)
+
+## Seed fare configs for testing
+
+The repository includes a reusable, idempotent fare config seed command that upserts a baseline dataset into `fare_configs`:
+
+- `KUL / RIDE` active default profile
+- `KUL / RIDE_PREMIUM` active premium profile
+- `JHB / RIDE` active default profile
+- `KUL / RIDE` legacy inactive profile with a closed effective window
+
+Run it with:
+
+```bash
+make seed-fare-config
+```
+
+or:
+
+```bash
+go run ./cmd/seed-fare-config
+```
