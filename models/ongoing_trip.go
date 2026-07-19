@@ -6,6 +6,22 @@ import (
 	"github.com/google/uuid"
 )
 
+const (
+	OngoingTripStatusAssigned       = "assigned"
+	OngoingTripStatusDriverArriving = "driver_arriving"
+	OngoingTripStatusInProgress     = "in_progress"
+	OngoingTripStatusCompleted      = "completed"
+	OngoingTripStatusCancelled      = "cancelled"
+)
+
+func ActiveOngoingTripStatuses() []string {
+	return []string{
+		OngoingTripStatusAssigned,
+		OngoingTripStatusDriverArriving,
+		OngoingTripStatusInProgress,
+	}
+}
+
 type OngoingTrip struct {
 	ID          uuid.UUID  `gorm:"column:id;type:uuid;primaryKey"`
 	RequestID   uuid.UUID  `gorm:"column:request_id;type:uuid;not null;uniqueIndex"`

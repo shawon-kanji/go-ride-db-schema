@@ -6,6 +6,27 @@ import (
 	"github.com/google/uuid"
 )
 
+const (
+	TripRequestStatusSearchStarted  = "search_started"
+	TripRequestStatusSearching      = "searching"
+	TripRequestStatusOffered        = "offered"
+	TripRequestStatusDriverAccepted = "driver_accepted"
+	TripRequestStatusDriverRejected = "driver_rejected"
+	TripRequestStatusTimedOut       = "timed_out"
+	TripRequestStatusAssigned       = "assigned"
+	TripRequestStatusCancelled      = "cancelled"
+)
+
+func ActiveTripRequestStatuses() []string {
+	return []string{
+		TripRequestStatusSearchStarted,
+		TripRequestStatusSearching,
+		TripRequestStatusOffered,
+		TripRequestStatusDriverAccepted,
+		TripRequestStatusDriverRejected,
+	}
+}
+
 type TripRequest struct {
 	ID              uuid.UUID  `gorm:"column:request_id;type:uuid;primaryKey"`
 	TripID          uuid.UUID  `gorm:"column:trip_id;type:uuid;not null;index"`
