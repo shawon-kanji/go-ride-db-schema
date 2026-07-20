@@ -6,6 +6,24 @@ import (
 	"github.com/google/uuid"
 )
 
+const (
+	DriverJobOfferStatusPending   = "pending"
+	DriverJobOfferStatusAccepted  = "accepted"
+	DriverJobOfferStatusRejected  = "rejected"
+	DriverJobOfferStatusExpired   = "expired"
+	DriverJobOfferStatusWithdrawn = "withdrawn"
+
+	DriverJobOfferDeliveryStatusPending   = "pending"
+	DriverJobOfferDeliveryStatusSent      = "sent"
+	DriverJobOfferDeliveryStatusDelivered = "delivered"
+	DriverJobOfferDeliveryStatusSeen      = "seen"
+	DriverJobOfferDeliveryStatusFailed    = "failed"
+)
+
+func ActiveDriverJobOfferStatuses() []string {
+	return []string{DriverJobOfferStatusPending}
+}
+
 type DriverJobOffer struct {
 	ID               uuid.UUID  `gorm:"column:job_offer_id;type:uuid;primaryKey"`
 	RequestID        uuid.UUID  `gorm:"column:request_id;type:uuid;not null;index"`

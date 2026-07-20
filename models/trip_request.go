@@ -47,8 +47,13 @@ type TripRequest struct {
 	AssignedAt      *time.Time `gorm:"column:assigned_at"`
 	CancelledAt     *time.Time `gorm:"column:cancelled_at"`
 	TimedOutAt      *time.Time `gorm:"column:timed_out_at"`
-	CreatedAt       time.Time
-	UpdatedAt       time.Time
+
+	DispatchAttemptCount int        `gorm:"column:dispatch_attempt_count;not null;default:0"`
+	DispatchRadiusKM     *float64   `gorm:"column:dispatch_radius_km;type:double precision"`
+	NextDispatchAt       *time.Time `gorm:"column:next_dispatch_at"`
+
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
 func (TripRequest) TableName() string {
