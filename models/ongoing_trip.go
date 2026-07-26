@@ -33,6 +33,7 @@ type OngoingTrip struct {
 	TripID             uuid.UUID  `gorm:"column:trip_id;type:uuid;not null;uniqueIndex"`
 	RiderID            uuid.UUID  `gorm:"column:rider_id;type:uuid;not null;index"`
 	DriverID           uuid.UUID  `gorm:"column:driver_id;type:uuid;not null;index"`
+	VehicleID          *uuid.UUID `gorm:"column:vehicle_id;type:uuid"`
 	Status             string     `gorm:"type:varchar(40);not null;default:assigned"`
 	PickupLat          float64    `gorm:"column:pickup_lat;type:double precision;not null"`
 	PickupLng          float64    `gorm:"column:pickup_lng;type:double precision;not null"`
