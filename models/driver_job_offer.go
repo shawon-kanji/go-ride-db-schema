@@ -38,6 +38,7 @@ type DriverJobOffer struct {
 	OfferedAt        time.Time  `gorm:"column:offered_at;not null"`
 	ExpiresAt        time.Time  `gorm:"column:expires_at;not null"`
 	RespondedAt      *time.Time `gorm:"column:responded_at"`
+	WithdrawnAt      *time.Time `gorm:"column:withdrawn_at"`
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 }
