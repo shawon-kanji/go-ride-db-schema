@@ -58,3 +58,23 @@ or:
 ```bash
 go run ./cmd/seed-fare-config
 ```
+
+## Deployment
+
+This repo has no Dockerfile, Helm chart, or CI/CD of its own — schema
+migrations are applied by whichever CI/CD pipeline is deploying a
+consuming service (`go-ride-kafka-consumers`, `go-ride-backend`), which runs
+[`cmd/migrate`](cmd/migrate) against that environment's database as a
+precondition before rolling out. Not a Kubernetes Job — see
+[`go-ride-infra`](https://github.com/shawon-kanji/go-ride-infra)'s
+[`docs/architecture.md`](https://github.com/shawon-kanji/go-ride-infra/blob/main/docs/architecture.md)
+("Schema migrations run through CI/CD, not a k8s Job").
+
+The RDS Postgres instance each environment's migration targets is
+provisioned by `go-ride-infra`'s
+[`terraform/modules/rds`](https://github.com/shawon-kanji/go-ride-infra/blob/main/terraform/modules/rds)
+(one instance per environment, in `terraform/environments/staging` /
+`terraform/environments/production`); locally, `go-ride-infra/local/deploy-local.sh`
+prints the exact `go run ./cmd/migrate up` invocation to run manually
+against the in-cluster Postgres (no CI/CD in kind, so this one step stays
+manual there).
