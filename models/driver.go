@@ -14,6 +14,7 @@ type Driver struct {
 	LastName        string    `gorm:"type:varchar(100);not null"`
 	AccountStatus   string    `gorm:"type:varchar(50);not null;default:pending"`
 	IsEmailVerified bool      `gorm:"not null;default:false"`
+	IsOnline        bool      `gorm:"column:is_online;not null;default:false"`
 	CreatedAt       time.Time
 	UpdatedAt       time.Time
 }
