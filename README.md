@@ -8,14 +8,16 @@ Shared database schema package for Go Ride services.
 - Versioned SQL migrations under `migrations/`
 - Embedded migration runner command under `cmd/migrate`
 
-## Local usage in sibling repos
+## Usage in sibling repos
 
-Add to `go.mod`:
+Consuming repos (`go-ride-backend`, `go-ride-kafka-consumers`) pin a tagged version, not a local `replace` directive:
 
-```go
-require github.com/shawon-kanji/go-ride-db-schema v0.0.0
-replace github.com/shawon-kanji/go-ride-db-schema => ../go-ride-db-schema
+```bash
+go get github.com/shawon-kanji/go-ride-db-schema@vX.Y.Z
+go mod tidy
 ```
+
+Commit the `go.mod`/`go.sum` bump as its own commit, separate from the feature code that uses the new schema. A local `replace github.com/shawon-kanji/go-ride-db-schema => ../go-ride-db-schema` directive is fine as a temporary aid while developing against unreleased migrations, but should be removed and replaced with a real tag before merging (see `go-ride-backend`/`go-ride-kafka-consumers` `go.mod` for the current pinned versions).
 
 ## Run migrations
 
