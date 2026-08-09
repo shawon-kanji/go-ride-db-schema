@@ -13,6 +13,10 @@ const (
 	DriverDocumentTypeDrivingLicenseFront = "driving_license_front"
 	DriverDocumentTypeDrivingLicenseBack  = "driving_license_back"
 	DriverDocumentTypeVehicleRegistration = "vehicle_registration"
+	DriverDocumentTypeVehiclePhotoFront   = "vehicle_photo_front"
+	DriverDocumentTypeVehiclePhotoBack    = "vehicle_photo_back"
+	DriverDocumentTypeVehiclePhotoSide    = "vehicle_photo_side"
+	DriverDocumentTypeVehicleNumberPlate  = "vehicle_number_plate"
 )
 
 const (
