@@ -55,10 +55,14 @@ func ActiveTripRequestStatuses() []string {
 }
 
 type TripRequest struct {
-	ID                 uuid.UUID  `gorm:"column:request_id;type:uuid;primaryKey"`
-	TripID             uuid.UUID  `gorm:"column:trip_id;type:uuid;not null;index"`
-	RiderID            uuid.UUID  `gorm:"column:rider_id;type:uuid;not null;index"`
-	FareID             *uuid.UUID `gorm:"column:fare_id;type:uuid;index"`
+	ID      uuid.UUID  `gorm:"column:request_id;type:uuid;primaryKey"`
+	TripID  uuid.UUID  `gorm:"column:trip_id;type:uuid;not null;index"`
+	RiderID uuid.UUID  `gorm:"column:rider_id;type:uuid;not null;index"`
+	FareID  *uuid.UUID `gorm:"column:fare_id;type:uuid;index"`
+	// ServiceType is copied from the chosen trip_fares row at booking time
+	// (see ServiceType* consts in trip_fare.go) — denormalized so dispatch's
+	// nearest-driver query can filter by tier without joining trip_fares.
+	ServiceType        string     `gorm:"column:service_type;type:varchar(32);not null;default:RIDE"`
 	Status             string     `gorm:"type:varchar(40);not null;default:search_started"`
 	PickupLat          float64    `gorm:"column:pickup_lat;type:double precision;not null"`
 	PickupLng          float64    `gorm:"column:pickup_lng;type:double precision;not null"`

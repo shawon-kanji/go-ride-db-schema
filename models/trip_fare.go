@@ -6,10 +6,25 @@ import (
 	"github.com/google/uuid"
 )
 
+// ServiceType* are the three ride tiers R03 actually specifies (Standard /
+// Standard 6 Seater / Standard Plus), named after fare_configs' pre-existing
+// RIDE/RIDE_PREMIUM seed convention rather than a new vocabulary.
+// ServiceTypeRide is the default, applied to every row that predates B1.
+const (
+	ServiceTypeRide        = "RIDE"
+	ServiceTypeRideXL      = "RIDE_XL"
+	ServiceTypeRidePremium = "RIDE_PREMIUM"
+)
+
+func ValidServiceTypes() []string {
+	return []string{ServiceTypeRide, ServiceTypeRideXL, ServiceTypeRidePremium}
+}
+
 type TripFare struct {
 	ID              uuid.UUID  `gorm:"column:fare_id;type:uuid;primaryKey"`
 	RequestID       *uuid.UUID `gorm:"column:request_id;type:uuid;uniqueIndex"`
 	RiderID         uuid.UUID  `gorm:"column:rider_id;type:uuid;not null;index"`
+	ServiceType     string     `gorm:"column:service_type;type:varchar(32);not null;default:RIDE"`
 	PickupLat       float64    `gorm:"column:pickup_lat;type:double precision;not null"`
 	PickupLng       float64    `gorm:"column:pickup_lng;type:double precision;not null"`
 	DropoffLat      float64    `gorm:"column:dropoff_lat;type:double precision;not null"`

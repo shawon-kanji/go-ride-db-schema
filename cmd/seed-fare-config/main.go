@@ -29,7 +29,63 @@ type fareConfigSeed struct {
 	MetadataJSON    string
 }
 
+// The DEFAULT/USD entries below back B1's three ride tiers (POLISHED-MVP.md)
+// for cab-request-handler's actual local/deployed config (FARE_CITY_CODE
+// defaults to "DEFAULT", FARE_CURRENCY_CODE to USD) -- distinct from the
+// pre-existing KUL/JHB MYR entries further down, which predate B1 and were
+// never wired to anything ("entirely unused" per the original gap
+// description). RIDE's rates match this repo's own cab-request-handler
+// .env.example exactly, so switching buildFareEstimate from flat env-var
+// pricing to fare_configs doesn't change the Standard tier's numbers.
 var seededFareConfigs = []fareConfigSeed{
+	{
+		ID:              "0b7f6b0e-2f0a-4a2e-9b2c-6e7b6b1a2c01",
+		CityCode:        "DEFAULT",
+		ServiceType:     "RIDE",
+		CurrencyCode:    "USD",
+		BaseFare:        5.00,
+		PerKMRate:       1.50,
+		PerMinuteRate:   0.25,
+		MinimumFare:     8.00,
+		BookingFee:      0,
+		CancellationFee: 0,
+		IsActive:        true,
+		EffectiveFrom:   time.Date(2026, 1, 1, 0, 0, 0, 0, time.UTC),
+		Priority:        100,
+		MetadataJSON:    `{"label":"default-ride","tier_name":"Standard","seed_version":"v1"}`,
+	},
+	{
+		ID:              "0b7f6b0e-2f0a-4a2e-9b2c-6e7b6b1a2c02",
+		CityCode:        "DEFAULT",
+		ServiceType:     "RIDE_XL",
+		CurrencyCode:    "USD",
+		BaseFare:        7.50,
+		PerKMRate:       2.25,
+		PerMinuteRate:   0.40,
+		MinimumFare:     12.00,
+		BookingFee:      0,
+		CancellationFee: 0,
+		IsActive:        true,
+		EffectiveFrom:   time.Date(2026, 1, 1, 0, 0, 0, 0, time.UTC),
+		Priority:        100,
+		MetadataJSON:    `{"label":"default-ride-xl","tier_name":"Standard 6 Seater","seed_version":"v1"}`,
+	},
+	{
+		ID:              "0b7f6b0e-2f0a-4a2e-9b2c-6e7b6b1a2c03",
+		CityCode:        "DEFAULT",
+		ServiceType:     "RIDE_PREMIUM",
+		CurrencyCode:    "USD",
+		BaseFare:        6.00,
+		PerKMRate:       1.80,
+		PerMinuteRate:   0.30,
+		MinimumFare:     9.50,
+		BookingFee:      0,
+		CancellationFee: 0,
+		IsActive:        true,
+		EffectiveFrom:   time.Date(2026, 1, 1, 0, 0, 0, 0, time.UTC),
+		Priority:        100,
+		MetadataJSON:    `{"label":"default-ride-premium","tier_name":"Standard Plus","seed_version":"v1"}`,
+	},
 	{
 		ID:              "5f5868a6-38df-45f2-b20f-57f9df9509b6",
 		CityCode:        "KUL",
