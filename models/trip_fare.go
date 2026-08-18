@@ -26,10 +26,17 @@ type TripFare struct {
 	SurgeMultiplier float64    `gorm:"column:surge_multiplier;type:numeric(8,4);not null;default:1"`
 	TotalFare       float64    `gorm:"column:total_fare;type:numeric(12,2);not null;default:0"`
 	PricingVersion  string     `gorm:"column:pricing_version;type:varchar(64);not null;default:v1"`
-	LockedAt        time.Time  `gorm:"column:locked_at;not null"`
-	ExpiresAt       *time.Time `gorm:"column:expires_at"`
-	CreatedAt       time.Time
-	UpdatedAt       time.Time
+	// RouteDistanceKM/RouteDurationMinutes/RoutePolyline come from a real
+	// directions provider, not the haversine straight-line estimate used
+	// when it's nil (provider call failed or was never attempted) — see
+	// cab-request-handler's buildFareEstimate.
+	RouteDistanceKM      *float64   `gorm:"column:route_distance_km;type:double precision"`
+	RouteDurationMinutes *float64   `gorm:"column:route_duration_minutes;type:double precision"`
+	RoutePolyline        *string    `gorm:"column:route_polyline;type:text"`
+	LockedAt             time.Time  `gorm:"column:locked_at;not null"`
+	ExpiresAt            *time.Time `gorm:"column:expires_at"`
+	CreatedAt            time.Time
+	UpdatedAt            time.Time
 }
 
 func (TripFare) TableName() string {
