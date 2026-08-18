@@ -22,6 +22,7 @@ type Driver struct {
 	AccountStatus   string    `gorm:"type:varchar(50);not null;default:pending"`
 	IsEmailVerified bool      `gorm:"not null;default:false"`
 	IsOnline        bool      `gorm:"column:is_online;not null;default:false"`
+	IsPaused        bool      `gorm:"column:is_paused;not null;default:false"`
 	KycStatus       string    `gorm:"column:kyc_status;type:varchar(20);not null;default:not_started"`
 	// RatingAverage is nil until the driver's first rating (B7) — distinct
 	// from a real 0.0, which this scale never produces (ratings are 1-5).
