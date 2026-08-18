@@ -40,6 +40,7 @@ type OngoingTrip struct {
 	DropoffLat         float64    `gorm:"column:dropoff_lat;type:double precision;not null"`
 	DropoffLng         float64    `gorm:"column:dropoff_lng;type:double precision;not null"`
 	AssignedAt         time.Time  `gorm:"column:assigned_at;not null"`
+	StartPin           *string    `gorm:"column:start_pin;type:varchar(4)"`
 	StartedAt          *time.Time `gorm:"column:started_at"`
 	EndedAt            *time.Time `gorm:"column:ended_at"`
 	CompletedAt        *time.Time `gorm:"column:completed_at"`
