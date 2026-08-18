@@ -19,7 +19,30 @@ const (
 	CancelledByRider  = "rider"
 	CancelledByDriver = "driver"
 	CancelledBySystem = "system"
+
+	// CancellationReason* are the five fixed reasons the driver app's cancel
+	// screen offers as radio options; a rider-initiated cancel may also send
+	// one, but isn't required to (rider cancellation has no reason-picker
+	// screen in the design).
+	CancellationReasonRiderAbsent       = "rider_absent"
+	CancellationReasonRiderRequested    = "rider_requested"
+	CancellationReasonVehicleProblem    = "vehicle_problem"
+	CancellationReasonUnsafeDestination = "unsafe_destination"
+	CancellationReasonOther             = "other"
 )
+
+// ValidCancellationReasons is the fixed enum accepted by both trip_requests
+// and ongoing_trips' cancellation_reason column (mirrored as a CHECK
+// constraint on each — see migration 000027).
+func ValidCancellationReasons() []string {
+	return []string{
+		CancellationReasonRiderAbsent,
+		CancellationReasonRiderRequested,
+		CancellationReasonVehicleProblem,
+		CancellationReasonUnsafeDestination,
+		CancellationReasonOther,
+	}
+}
 
 func ActiveTripRequestStatuses() []string {
 	return []string{
@@ -51,6 +74,7 @@ type TripRequest struct {
 	AssignedAt         *time.Time `gorm:"column:assigned_at"`
 	CancelledAt        *time.Time `gorm:"column:cancelled_at"`
 	CancellationReason *string    `gorm:"column:cancellation_reason"`
+	CancellationNote   *string    `gorm:"column:cancellation_note"`
 	CancelledBy        *string    `gorm:"column:cancelled_by;type:varchar(20)"`
 	TimedOutAt         *time.Time `gorm:"column:timed_out_at"`
 

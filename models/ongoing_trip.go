@@ -46,6 +46,7 @@ type OngoingTrip struct {
 	CompletedAt        *time.Time `gorm:"column:completed_at"`
 	CancelledAt        *time.Time `gorm:"column:cancelled_at"`
 	CancellationReason *string    `gorm:"column:cancellation_reason"`
+	CancellationNote   *string    `gorm:"column:cancellation_note"`
 	CancelledBy        *string    `gorm:"column:cancelled_by;type:varchar(20)"`
 	FinalFare          *float64   `gorm:"column:final_fare;type:numeric(12,2)"`
 	PaymentStatus      *string    `gorm:"column:payment_status;type:varchar(20)"`
